@@ -1,5 +1,9 @@
 # UFO-MGen
 
+<p align="center">
+  <img src="Picture2.png" alt="UFO-MGen logo" width="420">
+</p>
+
 **Topology-Stratified Materials Discovery with A Flow-Based Generative Model**
 
 UFO-MGen is a crystal generative framework built around a symmetry-aware
