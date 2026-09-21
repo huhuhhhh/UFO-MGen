@@ -82,16 +82,6 @@ materialized through
 [`data/route_inventory_124.csv`](data/route_inventory_124.csv), which links
 the topology targets to the corresponding generation checkpoints.
 
-Generation is controlled through the YAML configuration, route manifest, and
-downloaded model weights; users can choose the target route(s) and the number
-of structures to generate. For retraining or adaptation, the stage-specific
-model interfaces and training utilities are provided under
-[`src/ufo_mgen/models/`](src/ufo_mgen/models/) and
-[`src/ufo_mgen/train/`](src/ufo_mgen/train/). Custom crystal datasets can
-first be converted to the same Wyckoff representation with
-[`ufo_mgen.wyckoff`](src/ufo_mgen/wyckoff/) and then used with the released
-training workflow.
-
 ```bash
 python examples/inspect_model.py
 ```
@@ -131,6 +121,37 @@ python -m ufo_mgen.generation.generate_main \
 
 The released route inventory contains 124 route rows, 119 distinct
 space-group/scaffold targets, and 120 Stage-III checkpoint files.
+
+## Generation
+
+### Unconditional generation
+
+After downloading the released checkpoints, crystal structures can be sampled
+directly with the main generation entry point:
+
+```bash
+python -m ufo_mgen.generation.generate_main \
+    --config configs/ufo_mgen_final.yaml \
+    --weights-dir weights/ \
+    --num-samples 100 \
+    --output generated/
+```
+
+By default, the command follows the released route manifest. A specific route
+can also be selected with `--route-id` when needed.
+
+### Property-guided generation
+
+UFO-MGen also provides fine-tuning utilities for property-guided generation.
+In this work, we demonstrate this using DFT-derived mechanical-property data
+(`K`, `G`, and `E`) to obtain UFO-Mech. Users can replace these labels
+with their own property data, fine-tune the model toward other target
+properties, and then generate structures with the resulting checkpoints using
+the same generation workflow above.
+
+The mechanical example is provided in
+[`src/ufo_mgen/mech/`](src/ufo_mgen/mech/) and
+[`examples/mech_finetune.py`](examples/mech_finetune.py).
 
 ## Post-generation screening
 
