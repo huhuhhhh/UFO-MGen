@@ -21,7 +21,7 @@ class Route:
     route_key: str
     spacegroup: int
     scaffold: str
-    n_train: Optional[int] = None
+    route_train_count: Optional[int] = None
     data_package: Optional[str] = None
     checkpoint: Optional[str] = None
 
@@ -54,7 +54,10 @@ class RouteManifest:
                     route_key=str(r.get("route_key")),
                     spacegroup=int(r.get("spacegroup")),
                     scaffold=str(r.get("scaffold")),
-                    n_train=(int(r["n_train"]) if pd.notna(r.get("n_train")) else None),
+                    route_train_count=(
+                        int(r["route_train_count"])
+                        if pd.notna(r.get("route_train_count")) else None
+                    ),
                     data_package=(str(r["data_package"]) if pd.notna(r.get("data_package")) else None),
                     checkpoint=(str(r["checkpoint"]) if pd.notna(r.get("checkpoint")) else None),
                 )
@@ -85,5 +88,7 @@ class RouteManifest:
             "n_spacegroups": len({r.spacegroup for r in self.routes}),
             "n_unique_route_ids": len({r.route_id for r in self.routes}),
             "n_unique_route_keys": len({r.route_key for r in self.routes}),
-            "total_n_train": sum(r.n_train or 0 for r in self.routes),
+            "total_route_train_count": sum(
+                r.route_train_count or 0 for r in self.routes
+            ),
         }
