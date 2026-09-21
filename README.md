@@ -79,13 +79,18 @@ freedom, not the serialized vector length.
 
 For the released production profile, the Stage-I topology interface is
 materialized through
-[`data/route_inventory_124.csv`](data/route_inventory_124.csv). The manifest
-provides the space-group/scaffold targets and their Stage-III checkpoint
-mapping while preserving the Stage-I topology provenance.
+[`data/route_inventory_124.csv`](data/route_inventory_124.csv), which links
+the topology targets to the corresponding generation checkpoints.
 
-Stage II is a chemistry-aware autoregressive Transformer. Stage III uses a
-flow-matching vector field for the lattice and free Wyckoff coordinates, with
-periodic wrapping of the coordinate flow on `[0, 1)`.
+Generation is controlled through the YAML configuration, route manifest, and
+downloaded model weights; users can choose the target route(s) and the number
+of structures to generate. For retraining or adaptation, the stage-specific
+model interfaces and training utilities are provided under
+[`src/ufo_mgen/models/`](src/ufo_mgen/models/) and
+[`src/ufo_mgen/train/`](src/ufo_mgen/train/). Custom crystal datasets can
+first be converted to the same Wyckoff representation with
+[`ufo_mgen.wyckoff`](src/ufo_mgen/wyckoff/) and then used with the released
+training workflow.
 
 ```bash
 python examples/inspect_model.py
