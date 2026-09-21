@@ -1,8 +1,8 @@
-# UFO-MGen
-
 <p align="center">
-  <img src="Picture2.png" alt="UFO-MGen logo" width="420">
+  <img src="Picture2.png" alt="UFO-MGen logo" width="280">
 </p>
+
+# UFO-MGen
 
 **Topology-Stratified Materials Discovery with A Flow-Based Generative Model**
 
