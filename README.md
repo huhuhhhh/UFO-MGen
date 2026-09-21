@@ -93,31 +93,14 @@ python examples/inspect_model.py
 
 ## Dataset
 
-The released processed corpus is stored under [`data/`](data/).
+The released dataset is derived from Materials Project crystal structures and
+processed into the UFO-MGen Wyckoff representation used for training and
+generation. The processed files are provided under [`data/`](data/).
 
-| Item | Value |
-|---|---:|
-| structures | 38,124 |
-| train | 30,798 |
-| validation | 3,676 |
-| test | 3,650 |
-| trainable scaffolds | 119 |
-| space groups | 35 |
-| production routes | 124 |
-
-Main files:
-
-| File | Description |
-|---|---|
-| `UFO_MGen_unified_dataset.parquet` | structure-level processed corpus |
-| `UFO_MGen_per_orbit_blocks.parquet` | per-orbit free-coordinate blocks and masks |
-| `UFO_MGen_variable_schema.csv` | free-parameter schema by scaffold |
-| `wyckoff_scaffolds.csv` | scaffold metadata and representation complexity |
-| `route_inventory_124.csv` | production route and Stage-III checkpoint mapping |
-
-The route-weighted training total is 32,550, while the released deduplicated
-training split contains 30,798 distinct structures. These are separate
-bookkeeping quantities.
+Other crystal datasets can be used for training once represented in the same
+Wyckoff format. CIF structures can be converted with the provided
+[`examples/encode_structure.py`](examples/encode_structure.py) example or the
+[`ufo_mgen.wyckoff`](src/ufo_mgen/wyckoff/) encoding utilities.
 
 ## Configuration
 
