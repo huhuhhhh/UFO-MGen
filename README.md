@@ -243,10 +243,16 @@ python examples/mp20_benchmark.py
 
 ## Extrapolation
 
-UFO-MGen can transfer shared Wyckoff-position information across related
-scaffolds, allowing generation in target space groups outside the training
-coverage. To test this capability, use the extrapolation entry point with the
-shared MP20 checkpoint:
+Extrapolation in UFO-MGen is also observed as an emergent outcome of
+unconditional generation. After stability screening, some generated crystals
+are identified in space groups outside the training coverage, without those
+unseen space-group labels being explicitly supplied as generation conditions.
+This behavior is enabled by sharing Wyckoff-position information across
+scaffolds, which allows structural information to transfer beyond the
+space-group distribution seen during training.
+
+For a controlled probe of this behavior, the extrapolation utility can be used
+with the shared MP20 checkpoint:
 
 ```bash
 python -m ufo_mgen.generation.generate_extrapolation \
@@ -255,7 +261,7 @@ python -m ufo_mgen.generation.generate_extrapolation \
     --spacegroup <SG>
 ```
 
-Replace `<SG>` with the target space-group number. The implementation is in
+The implementation is in
 [`ufo_mgen.generation.generate_extrapolation`](src/ufo_mgen/generation/generate_extrapolation.py).
 
 ## Tests
