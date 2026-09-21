@@ -1,0 +1,16 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.DS_Store
+.idea/
+.vscode/
+
+# Runtime outputs / external weights
+generated/
+runs/
+weights/
+*.pt
+*.ckpt
+*.tar.zst

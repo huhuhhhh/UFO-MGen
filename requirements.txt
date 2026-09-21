@@ -1,0 +1,18 @@
+# UFO-MGen -- runtime requirements.
+#
+# Symmetry analysis (pymatgen/spglib) and the Wyckoff tables (pyxtal) determine
+# the encoding directly. Pin them if you need bit-identical representations.
+
+numpy>=2.0,<3.0
+pandas>=2.2,<3.0
+pyarrow>=16.0          # reading the released parquet corpus
+
+pymatgen>=2024.8,<2027.0
+spglib>=2.5,<3.0
+pyxtal>=1.0,<2.0
+
+torch>=2.4,<3.0        # the three model stages
+pyyaml>=6.0            # configs
+
+# Optional, imported lazily:
+#   zstandard>=0.22    # reading .tar.zst structure archives

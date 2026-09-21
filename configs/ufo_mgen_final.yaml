@@ -1,0 +1,68 @@
+# UFO-MGen -- final production configuration (manuscript main model).
+#
+# All paths are relative to the repository root. Model weights are NOT in this
+# repository: download the Zenodo archive named under `weights_archive` and
+# point `weights_dir` at the extracted directory.
+
+name: ufo_mgen_final
+version: 1.0.0
+
+# ---------------------------------------------------------------- data
+dataset: data/UFO_MGen_unified_dataset.parquet
+scaffolds: data/wyckoff_scaffolds.csv
+routes: data/route_inventory_124.csv
+
+dataset_summary:
+  total_structures: 38124
+  train: 30798
+  validation: 3676
+  test: 3650
+  trainable_scaffolds: 119
+  space_groups: 35
+  route_weighted_train_total: 32550
+  routes: 124
+
+# ---------------------------------------------------------------- weights
+weights_archive: UFO_MGen_Final_weights.tar.zst
+weights_dir: null          # set to the extracted archive directory
+model_manifest: manifests/UFO_MGen_models.csv
+
+models:
+  stage1_hts:
+    checkpoint: stage1/hts.pt
+    hidden_dim: 256
+    embed_dim: 64
+    # Released production topology interface.
+    topology_source: manifest
+    route_manifest: data/route_inventory_124.csv
+  stage2_com:
+    checkpoint: stage2/com.pt
+    d_model: 256
+    n_heads: 8
+    n_layers: 4
+    max_orbits: 32
+    constraint_mode: soft
+    temperature: 0.8
+  stage3_swg:
+    # One checkpoint per route; see data/route_inventory_124.csv
+    checkpoint_dir: stage3
+    hidden_dim: 192
+    adapter_dim: 128
+    n_attn_heads: 4
+    n_attn_layers: 2
+    context_mode: discrete_chem_topology_only
+    n_checkpoints: 120
+
+# ---------------------------------------------------------------- generation
+generation:
+  integration_steps: 48
+  sample_temp: 0.5
+  project_lattice: true
+  seed: 44                     
+  candidates_per_route: null    # user-defined; set the desired samples per route
+
+
+
+symmetry:
+  encode_symprec: 0.01
+  encode_angle_tolerance: 5.0

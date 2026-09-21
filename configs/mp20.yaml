@@ -1,0 +1,35 @@
+# UFO-MGen -- MP20 benchmark configuration.
+#
+# MP20 benchmark configuration and checkpoint provenance.
+# See manifests/MP20_models.csv for the released model inventory.
+
+name: ufo_mgen_mp20
+version: 1.0.0
+
+weights_archive: UFO_MGen_MP20_paper_weights.tar.zst
+weights_dir: null
+model_manifest: manifests/MP20_models.csv
+
+
+models:
+  union:
+    checkpoint: union/v1_union_min5.pt
+    data_package: data
+    default_spacegroup: 225
+    default_scaffold: "4a;4b"
+    integration_steps: 48
+    sample_temp: 0.5
+    post_projection: false     
+  per_sg:
+    checkpoint_dir: per_sg
+    data_package: data
+    n_checkpoints: 161
+    integration_steps: 48
+    sample_temp: 0.5
+  extrapolation:
+    checkpoint: union/v1_union_min5_topo.pt
+    data_package: data
+    context_mode: topology_chem_only   # Stage I + scaffold identity bypassed
+    seed_source: pyxtal_wyckoff_templates
+    integration_steps: 48
+    sample_temp: 0.5
