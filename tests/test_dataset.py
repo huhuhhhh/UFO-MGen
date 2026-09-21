@@ -29,9 +29,9 @@ def test_scaffold_table_agrees_with_corpus():
     assert len(sc) == 119
     assert set(sc.scaffold_id) == set(df.scaffold_id.unique())
     assert int(sc.support_count.sum()) == len(df)
-    assert int(sc.train_count.sum()) == 30798
+    assert int(sc.released_train_count.sum()) == 30798
     for _, r in sc.iterrows():
-        assert r.support_count == r.train_count + r.val_count + r.test_count
+        assert r.support_count == r.released_train_count + r.val_count + r.test_count
 
 
 def test_scaffold_drep_matches_the_paper_definition():
