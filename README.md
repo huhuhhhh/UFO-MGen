@@ -231,38 +231,32 @@ main-text Fig. 2(f) and Supplementary Sections S4.1-S4.3.
 The repository provides the representative generated CIFs. Raw DFT outputs,
 phonon working directories, and AIMD trajectories are not redistributed here.
 
-## MP20 benchmark and extrapolation
+## MP20 benchmark
 
-The MP20 release is described by
-[`configs/mp20.yaml`](configs/mp20.yaml) and
-[`manifests/MP20_models.csv`](manifests/MP20_models.csv). The manifest
-contains 3 shared union checkpoints and 161 per-space-group checkpoints.
+The MP20 benchmark uses the configuration in
+[`configs/mp20.yaml`](configs/mp20.yaml) and the checkpoint inventory in
+[`manifests/MP20_models.csv`](manifests/MP20_models.csv).
 
 ```bash
 python examples/mp20_benchmark.py
 ```
 
-Evaluation utilities are available under
-[`ufo_mgen.evaluation`](src/ufo_mgen/evaluation/). The extrapolation
-implementation is in
-[`ufo_mgen.generation.generate_extrapolation`](src/ufo_mgen/generation/generate_extrapolation.py).
+## Extrapolation
 
-## UFO-Mech
-
-[`ufo_mgen.mech`](src/ufo_mgen/mech/) contains the property-guided extension
-used for mechanical-property-oriented generation. The fine-tuning score uses
-bulk, shear, and Young's moduli with equal weight:
-
-```text
-score = z(log K) + z(log G) + z(log E) - penalty
-```
-
-The lightweight surrogate is used only for candidate prioritization. Final
-`K`, `G`, and `E` values are recomputed with MatterSim.
+UFO-MGen can transfer shared Wyckoff-position information across related
+scaffolds, allowing generation in target space groups outside the training
+coverage. To test this capability, use the extrapolation entry point with the
+shared MP20 checkpoint:
 
 ```bash
-python examples/mech_finetune.py
+python -m ufo_mgen.generation.generate_extrapolation \
+    --config configs/mp20.yaml \
+    --weights-dir weights/ \
+    --spacegroup <SG>
 ```
+
+Replace `<SG>` with the target space-group number. The implementation is in
+[`ufo_mgen.generation.generate_extrapolation`](src/ufo_mgen/generation/generate_extrapolation.py).
 
 ## Pretrained weights
 
