@@ -1,4 +1,4 @@
-scaffold_id,space_group,crystal_system,K,wyckoff_sequence,D_rep,rho,support_count,train_count,val_count,test_count,median_n_atoms,n_lattice_dims,n_wyckoff_dims,packed_feature_dim
+scaffold_id,space_group,crystal_system,K,wyckoff_sequence,D_rep,rho,support_count,released_train_count,val_count,test_count,median_n_atoms,serialized_lattice_dim,n_free_wyckoff_coords,packed_feature_dim
 SG1|1a;1a;1a;1a;1a;1a;1a;1a;1a;1a;1a,1,triclinic,11,1a;1a;1a;1a;1a;1a;1a;1a;1a;1a;1a,39,1.0,284,229,27,28,11,6,33,39
 SG1|1a;1a;1a;1a;1a;1a;1a;1a;1a;1a;1a;1a,1,triclinic,12,1a;1a;1a;1a;1a;1a;1a;1a;1a;1a;1a;1a,42,1.0,252,207,24,21,12,6,36,42
 SG1|1a;1a;1a;1a;1a;1a;1a;1a;1a;1a;1a;1a;1a,1,triclinic,13,1a;1a;1a;1a;1a;1a;1a;1a;1a;1a;1a;1a;1a,45,1.0,442,357,45,40,13,6,39,45
