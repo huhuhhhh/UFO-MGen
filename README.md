@@ -5,12 +5,10 @@
 UFO-MGen is a crystal generative framework built around a symmetry-aware
 Wyckoff representation. This repository contains the processed dataset,
 representation and model implementations, generation/screening/evaluation
-utilities, benchmark configurations, and representative DFT-validated
-structures used in the manuscript.
+utilities, and representative DFT-validated structures used in the manuscript.
 
 Pretrained UFO-MGen checkpoints are distributed separately from GitHub;
-checkpoint inventories and SHA256 hashes are provided under
-[`manifests/`](manifests/).
+checkpoint inventories are provided under [`manifests/`](manifests/).
 
 ## Installation
 
@@ -104,7 +102,7 @@ Two public YAML configurations are provided:
 | Config | Purpose |
 |---|---|
 | `configs/ufo_mgen_final.yaml` | main UFO-MGen model and route-based generation profile |
-| `configs/mp20.yaml` | MP20 benchmark and extrapolation profile |
+| `configs/mp20.yaml` | MP20-trained extrapolation profile |
 
 The main configuration records dataset paths, model architecture, checkpoint
 locations, sampling parameters, and symmetry tolerances.
@@ -139,6 +137,14 @@ python -m ufo_mgen.generation.generate_main \
 
 By default, the command follows the released route manifest. A specific route
 can also be selected with `--route-id` when needed.
+
+> **Reproducibility note.** Retraining may produce small differences from the
+> checkpoints and numerical results reported in the manuscript. The training
+> pipeline includes stochastic data ordering and sampling, and some workflows
+> use weighted resampling; preprocessing/library versions and nondeterministic
+> GPU operations can also introduce minor variation. For the closest comparison
+> with the reported results, use the released processed data, configurations,
+> random seeds, and checkpoints.
 
 ### Property-guided generation
 
@@ -230,16 +236,6 @@ main-text Fig. 2(f) and Supplementary Sections S4.1-S4.3.
 
 The repository provides the representative generated CIFs. Raw DFT outputs,
 phonon working directories, and AIMD trajectories are not redistributed here.
-
-## MP20 benchmark
-
-The MP20 benchmark uses the configuration in
-[`configs/mp20.yaml`](configs/mp20.yaml) and the checkpoint inventory in
-[`manifests/MP20_models.csv`](manifests/MP20_models.csv).
-
-```bash
-python examples/mp20_benchmark.py
-```
 
 ## Extrapolation
 
