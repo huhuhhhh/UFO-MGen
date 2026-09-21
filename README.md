@@ -258,58 +258,13 @@ python -m ufo_mgen.generation.generate_extrapolation \
 Replace `<SG>` with the target space-group number. The implementation is in
 [`ufo_mgen.generation.generate_extrapolation`](src/ufo_mgen/generation/generate_extrapolation.py).
 
-## Pretrained weights
-
-UFO-MGen model weights are not stored in GitHub.
-
-| Archive | Contents |
-|---|---|
-| `UFO_MGen_Final_weights.tar.zst` | Stage I x1, Stage II x1, Stage III x120 |
-| `UFO_MGen_MP20_paper_weights.tar.zst` | 3 shared union + 161 per-space-group checkpoints |
-
-Checkpoint filenames, sizes, SHA256 hashes, and archive mappings are recorded
-in:
-
-- `manifests/UFO_MGen_models.csv`
-- `manifests/MP20_models.csv`
-
-The manifest DOI fields remain `PENDING` until the external archives are
-deposited.
-
-## Repository layout
-
-```text
-configs/       experiment and benchmark YAML configurations
-data/          processed UFO-MGen dataset and route inventory
-examples/      minimal usage examples and representative CIFs
-manifests/     checkpoint inventories and SHA256 hashes
-src/ufo_mgen/
-  models/      HTS, COM, and SWG
-  wyckoff/     encoding, decoding, canonicalization, lattice projection
-  generation/  route-based and extrapolation generation utilities
-  screening/   post-generation screening
-  evaluation/  validity, coverage, S.U.N., MSE, interpolation/extrapolation
-  mlip/        CHGNet, MACE, and MatterSim interfaces
-  mech/        UFO-Mech utilities
-  train/       training utilities and entry points
-tests/         lightweight integrity and interface checks
-```
-
 ## Tests
 
-The repository includes lightweight tests that do not require the UFO-MGen
-checkpoint archives:
-
-```bash
-python tests/test_wyckoff.py
-python tests/test_decode.py
-python tests/test_dataset.py
-python tests/test_models.py
-python tests/test_screening.py
-python tests/test_mech.py
-python tests/test_extrapolation.py
-python tests/test_evaluation.py
-```
+The lightweight tests are included to verify that the released data schema,
+Wyckoff encoding/decoding, model interfaces, and screening/evaluation utilities
+remain consistent after installation or code changes. They are intended as
+sanity and integrity checks rather than as a reproduction of manuscript
+results.
 
 ## Release scope
 
