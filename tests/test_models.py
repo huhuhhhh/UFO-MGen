@@ -226,7 +226,7 @@ def test_route_manifest_matches_the_corpus():
     assert s["n_routes"] == 124
     assert s["n_unique_scaffolds"] == 119
     assert s["n_spacegroups"] == 35
-    assert s["total_n_train"] == 32550        # route-weighted, see README
+    assert s["total_route_train_count"] == 32550
     assert s["n_unique_route_ids"] == 124
     assert s["n_unique_route_keys"] == 119
     assert set(m.unique_scaffolds()) == set(load_scaffolds().scaffold_id)
